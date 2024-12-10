@@ -32,6 +32,7 @@ public class PhotonVisionIO implements VisionIO{
     boolean exists;
 
     public PhotonVisionIO(){
+        
         frontRightCamera = new PhotonCamera(Constants.AprilTags.FRONT_RIGHT_CAMERA_NAME);   //Right
         frontLeftCamera = new PhotonCamera(Constants.AprilTags.FRONT_LEFT_CAMERA_NAME);   //Left
         backLeftCamera = new PhotonCamera(Constants.AprilTags.BACK_LEFT_CAMERA_NAME);
