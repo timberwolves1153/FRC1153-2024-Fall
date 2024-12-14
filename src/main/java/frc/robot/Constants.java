@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.Filesystem;
  */
 public final class Constants {
 
-  public static final Mode currentMode = Mode.REAL;
+  public static final Mode currentMode = Mode.SIM;
 
   public static enum Mode {
     /** Running on a real robot. */
