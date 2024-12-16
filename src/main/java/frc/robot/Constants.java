@@ -42,8 +42,8 @@ public final class Constants {
         public static final double TAU = 2 * Math.PI;
 
             public static final String FRONT_RIGHT_CAMERA_NAME = "Mike's Little Buddy";
-            public static final String FRONT_LEFT_CAMERA_NAME = "Brian's Little Buddy"; //Azul's_Little_Buddy
-            public static final String BACK_RIGHT_CAMERA_NAME = "John's Little Buddy"; //Ben's_Little_Buddy (1)
+            public static final String FRONT_LEFT_CAMERA_NAME = "Brian's Little Buddy"; 
+            public static final String BACK_RIGHT_CAMERA_NAME = "John's Little Buddy"; 
             public static final String BACK_LEFT_CAMERA_NAME = "Roger's Little Buddy";
 
             /* For PhotonEstimator

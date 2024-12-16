@@ -3,13 +3,14 @@ package frc.robot.subsystems.vision;
 import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class AprilTagManager extends SubsystemBase {
     private VisionIO io;
     private static VisionIOInputsAutoLogged inputs = new VisionIOInputsAutoLogged();
 
-    public AprilTagManager(){
-        io = new PhotonVisionIO();
+    public AprilTagManager(VisionIO io){
+        this.io = io;
     }
 
     @Override

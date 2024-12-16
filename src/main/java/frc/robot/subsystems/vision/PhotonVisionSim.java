@@ -27,14 +27,11 @@ import org.photonvision.simulation.VisionSystemSim;
 import com.google.flatbuffers.Constants;
 
 /** IO implementation for physics sim using PhotonVision simulator. */
-public class PhotonVisionSim extends PhotonVisionIO {
+public class PhotonVisionSim implements VisionIO {
   private static VisionSystemSim visionSim;
 
   private final Supplier<Pose2d> poseSupplier;
-  private final PhotonCameraSim frontLeftCameraSim;
-  private final PhotonCameraSim frontRightCameraSim;
-  private final PhotonCameraSim backLeftCameraSim;
-  private final PhotonCameraSim backRightCameraSim;
+  
 
   /**
    * Creates a new VisionIOPhotonVisionSim.

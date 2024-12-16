@@ -33,10 +33,7 @@ public class PhotonVisionIO implements VisionIO{
 
     public PhotonVisionIO(){
         
-        frontRightCamera = new PhotonCamera(Constants.AprilTags.FRONT_RIGHT_CAMERA_NAME);   //Right
-        frontLeftCamera = new PhotonCamera(Constants.AprilTags.FRONT_LEFT_CAMERA_NAME);   //Left
-        backLeftCamera = new PhotonCamera(Constants.AprilTags.BACK_LEFT_CAMERA_NAME);
-        backRightCamera = new PhotonCamera(Constants.AprilTags.BACK_RIGHT_CAMERA_NAME);
+       
         
         try{
             layout = new AprilTagFieldLayout(Constants.AprilTags.LAYOUT_PATH);

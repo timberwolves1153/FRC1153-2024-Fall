@@ -29,9 +29,12 @@ import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIOSparkMax;
 import frc.robot.subsystems.vision.AprilTagManager;
 import frc.robot.subsystems.vision.PhotonVisionSim;
 import frc.robot.subsystems.vision.VisionIO;
+import frc.robot.subsystems.wrist.Wrist;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
@@ -47,6 +50,8 @@ public class RobotContainer {
   public static Drive drive;
   public static AprilTagManager aprilTags;
   public static PhotonVisionSim VisionSim;
+  public static Elevator elevator;
+  public static Wrist wrist;
   
 
   // Controller
@@ -67,7 +72,9 @@ public class RobotContainer {
         new ModuleIOTalonFX(1),
         new ModuleIOTalonFX(2),
         new ModuleIOTalonFX(3));
-        aprilTags = new AprilTagManager();
+        //aprilTags = new AprilTagManager();
+        elevator = new Elevator(new ElevatorIOSparkMax());
+        wrist = new Wrist();
         // flywheel = new Flywheel(new FlywheelIOTalonFX());
         break;
 
@@ -80,7 +87,8 @@ public class RobotContainer {
                 new ModuleIOSim(),
                 new ModuleIOSim(),
                 new ModuleIOSim());
-        VisionSim = new PhotonVisionSim(drive::getPose);
+        // aprilTags = new AprilTagManager();
+        // VisionSim = new PhotonVisionSim();
         
         break;
 
@@ -128,10 +136,28 @@ public class RobotContainer {
             () -> -controller.getLeftY(),
             () -> -controller.getLeftX(),
             () -> -controller.getRightX()));
-    controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+    //controller.start().onTrue(Commands.runOnce(drive::stopWithX, drive));
     controller
-        .b()
+        .start()
         .onTrue(new InstantCommand(() -> drive.zeroAngle()));
+
+      controller.a().onTrue(new InstantCommand(() -> elevator.setVoltage(-4)));
+      controller.a().onFalse(new InstantCommand(() -> elevator.stop()));
+
+      controller.y().onTrue(new InstantCommand(() -> elevator.setVoltage(4)));
+      controller.y().onFalse(new InstantCommand(() -> elevator.stop()));  
+      
+      controller.x().onTrue(new InstantCommand(() -> wrist.setPivotVolts(3)));
+      controller.x().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      
+      controller.b().onTrue(new InstantCommand(() -> wrist.setPivotVolts(-3)));
+      controller.b().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      
+      controller.leftBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
+      controller.leftBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+
+      controller.rightBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
+      controller.rightBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
             
     }
 
