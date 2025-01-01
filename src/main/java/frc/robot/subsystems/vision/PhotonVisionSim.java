@@ -46,28 +46,28 @@ public class PhotonVisionSim implements VisionIO {
     // Initialize vision sim
     if (visionSim == null) {
       visionSim = new VisionSystemSim("main");
-      visionSim.addAprilTags(layout);
+     // visionSim.addAprilTags(layout);
     }
 
     // Add sim camera
     var cameraProperties = new SimCameraProperties();
-    frontLeftCameraSim = new PhotonCameraSim(frontLeftCamera, cameraProperties);
-    visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_FRONT_LEFT);
+    //frontLeftCameraSim = new PhotonCameraSim(frontLeftCamera, cameraProperties);
+    // visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_FRONT_LEFT);
   
-    frontRightCameraSim = new PhotonCameraSim(frontRightCamera, cameraProperties);
-    visionSim.addCamera(frontRightCameraSim, AprilTags.ROBOT_TO_CAMERA_FRONT_RIGHT);
+    // frontRightCameraSim = new PhotonCameraSim(frontRightCamera, cameraProperties);
+    // visionSim.addCamera(frontRightCameraSim, AprilTags.ROBOT_TO_CAMERA_FRONT_RIGHT);
 
-    backLeftCameraSim = new PhotonCameraSim(backLeftCamera, cameraProperties);
-    visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_BACK_LEFT);
+    // backLeftCameraSim = new PhotonCameraSim(backLeftCamera, cameraProperties);
+    // visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_BACK_LEFT);
 
-    backRightCameraSim = new PhotonCameraSim(backRightCamera, cameraProperties);
-    visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_BACK_RIGHT);
+    // backRightCameraSim = new PhotonCameraSim(backRightCamera, cameraProperties);
+    // visionSim.addCamera(frontLeftCameraSim, AprilTags.ROBOT_TO_CAMERA_BACK_RIGHT);
 
   }
 
   @Override
   public void updateInputs(VisionIOInputs inputs) {
     visionSim.update(poseSupplier.get());
-    super.updateInputs(inputs);
+    //super.updateInputs(inputs);
   }
 }

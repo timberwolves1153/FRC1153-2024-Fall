@@ -1,5 +1,7 @@
 package frc.robot.subsystems.elevator;
 
+import org.littletonrobotics.junction.AutoLogOutput;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -14,10 +16,6 @@ public class ElevatorIOSparkMax implements ElevatorIO{
 
     private CANSparkMax leftMotor, rightMotor;
     private RelativeEncoder encoder;
-    private PIDController elevatorPID;
-    private ElevatorFeedforward elevatorFF;
-    private TrapezoidProfile.Constraints elevatorConstraints;
-    private ProfiledPIDController profiledPID;
     
     public ElevatorIOSparkMax() {
 
@@ -25,14 +23,7 @@ public class ElevatorIOSparkMax implements ElevatorIO{
         rightMotor = new CANSparkMax(42, MotorType.kBrushless);
         encoder = leftMotor.getEncoder();
 
-        elevatorConstraints =
-        new TrapezoidProfile.Constraints(60.0, 40.0);
-
-        profiledPID =
-        new ProfiledPIDController(0.25 / 7, 0.0, 0.0139 / 2, elevatorConstraints);
-        elevatorPID = new PIDController(0.5, 0, 0);
-        elevatorFF = new ElevatorFeedforward(1.0e-2, 0.11, 0.01);
-        
+       
 
         configMotors();
 
@@ -87,12 +78,10 @@ public class ElevatorIOSparkMax implements ElevatorIO{
         return currentPosition * conversionFactor;
     }
 
-    public double inchesToTicks(double setpoint) {
-        double ticksPerRev = 42;
-        double shaftRadius = 0.0625;
-        double distanceperRev = shaftRadius * Math.PI * 2;
-        double conversionFactor = distanceperRev / ticksPerRev;
-
-        return setpoint / conversionFactor;
+    public double getPosition() {
+        return encoder.getPosition();
     }
+
+    
+
 }

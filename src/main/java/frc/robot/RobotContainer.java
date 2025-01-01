@@ -30,6 +30,7 @@ import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.elevator.ElevatorIOSparkMax;
 import frc.robot.subsystems.vision.AprilTagManager;
 import frc.robot.subsystems.vision.PhotonVisionSim;
@@ -87,6 +88,7 @@ public class RobotContainer {
                 new ModuleIOSim(),
                 new ModuleIOSim(),
                 new ModuleIOSim());
+        elevator = new Elevator(new ElevatorIOSim());
         // aprilTags = new AprilTagManager();
         // VisionSim = new PhotonVisionSim();
         
@@ -147,17 +149,17 @@ public class RobotContainer {
       controller.y().onTrue(new InstantCommand(() -> elevator.setVoltage(4)));
       controller.y().onFalse(new InstantCommand(() -> elevator.stop()));  
       
-      controller.x().onTrue(new InstantCommand(() -> wrist.setPivotVolts(3)));
-      controller.x().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // controller.x().onTrue(new InstantCommand(() -> wrist.setPivotVolts(3)));
+      // controller.x().onFalse(new InstantCommand(() -> wrist.stopPivot()));
       
-      controller.b().onTrue(new InstantCommand(() -> wrist.setPivotVolts(-3)));
-      controller.b().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // controller.b().onTrue(new InstantCommand(() -> wrist.setPivotVolts(-3)));
+      // controller.b().onFalse(new InstantCommand(() -> wrist.stopPivot()));
       
-      controller.leftBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
-      controller.leftBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // controller.leftBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
+      // controller.leftBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
 
-      controller.rightBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
-      controller.rightBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // controller.rightBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
+      // controller.rightBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
             
     }
 

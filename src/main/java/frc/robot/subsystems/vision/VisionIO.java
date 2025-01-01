@@ -50,10 +50,10 @@ public interface VisionIO{
         public boolean backRightHasTarget = false;
         public double backRightAmbiguity = 0;
 
-        public PhotonCamera frontRightCamera = new PhotonCamera(Constants.AprilTags.FRONT_RIGHT_CAMERA_NAME);   //Right
-        public PhotonCamera frontLeftCamera = new PhotonCamera(Constants.AprilTags.FRONT_LEFT_CAMERA_NAME);   //Left
-        public PhotonCamera backLeftCamera = new PhotonCamera(Constants.AprilTags.BACK_LEFT_CAMERA_NAME);
-        public PhotonCamera backRightCamera = new PhotonCamera(Constants.AprilTags.BACK_RIGHT_CAMERA_NAME);
+        // public PhotonCamera frontRightCamera = new PhotonCamera(Constants.AprilTags.FRONT_RIGHT_CAMERA_NAME);   //Right
+        // public PhotonCamera frontLeftCamera = new PhotonCamera(Constants.AprilTags.FRONT_LEFT_CAMERA_NAME);   //Left
+        // public PhotonCamera backLeftCamera = new PhotonCamera(Constants.AprilTags.BACK_LEFT_CAMERA_NAME);
+        // public PhotonCamera backRightCamera = new PhotonCamera(Constants.AprilTags.BACK_RIGHT_CAMERA_NAME);
     }
 
     public default void updateInputs(VisionIOInputs inputs) {}
