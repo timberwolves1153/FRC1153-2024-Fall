@@ -32,10 +32,10 @@ import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.elevator.ElevatorIOSparkMax;
+import frc.robot.subsystems.flywheel.Wrist;
 import frc.robot.subsystems.vision.AprilTagManager;
 import frc.robot.subsystems.vision.PhotonVisionSim;
 import frc.robot.subsystems.vision.VisionIO;
-import frc.robot.subsystems.wrist.Wrist;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
