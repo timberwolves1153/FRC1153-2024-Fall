@@ -23,6 +23,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.subsystems.collector.Collector;
+import frc.robot.subsystems.collector.CollectorIOSim;
+import frc.robot.subsystems.collector.CollectorIOSparkMax;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -32,10 +35,13 @@ import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.elevator.ElevatorIOSparkMax;
-import frc.robot.subsystems.flywheel.Wrist;
+
 import frc.robot.subsystems.vision.AprilTagManager;
 import frc.robot.subsystems.vision.PhotonVisionSim;
 import frc.robot.subsystems.vision.VisionIO;
+import frc.robot.subsystems.wrist.Wrist;
+import frc.robot.subsystems.wrist.WristIOSim;
+import frc.robot.subsystems.wrist.WristIOSparkMax;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
@@ -53,6 +59,8 @@ public class RobotContainer {
   public static PhotonVisionSim VisionSim;
   public static Elevator elevator;
   public static Wrist wrist;
+  public static Collector collector;
+  
   
 
   // Controller
@@ -75,7 +83,9 @@ public class RobotContainer {
         new ModuleIOTalonFX(3));
         //aprilTags = new AprilTagManager();
         elevator = new Elevator(new ElevatorIOSparkMax());
-        wrist = new Wrist();
+        wrist = new Wrist(new WristIOSparkMax());
+        collector = new Collector(new CollectorIOSparkMax());
+        
         // flywheel = new Flywheel(new FlywheelIOTalonFX());
         break;
 
@@ -89,6 +99,8 @@ public class RobotContainer {
                 new ModuleIOSim(),
                 new ModuleIOSim());
         elevator = new Elevator(new ElevatorIOSim());
+        wrist = new Wrist(new WristIOSim());
+        collector = new Collector(new CollectorIOSim());
         // aprilTags = new AprilTagManager();
         // VisionSim = new PhotonVisionSim();
         
@@ -143,23 +155,29 @@ public class RobotContainer {
         .start()
         .onTrue(new InstantCommand(() -> drive.zeroAngle()));
 
+      // elevator down
       controller.a().onTrue(new InstantCommand(() -> elevator.setVoltage(-4)));
       controller.a().onFalse(new InstantCommand(() -> elevator.stop()));
 
+      // elevator up
       controller.y().onTrue(new InstantCommand(() -> elevator.setVoltage(4)));
       controller.y().onFalse(new InstantCommand(() -> elevator.stop()));  
       
-      // controller.x().onTrue(new InstantCommand(() -> wrist.setPivotVolts(3)));
-      // controller.x().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // wrist up/in
+      controller.x().onTrue(new InstantCommand(() -> wrist.setVoltage(3)));
+      controller.x().onFalse(new InstantCommand(() -> wrist.stop()));
       
-      // controller.b().onTrue(new InstantCommand(() -> wrist.setPivotVolts(-3)));
-      // controller.b().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // wrist down/out
+      controller.b().onTrue(new InstantCommand(() -> wrist.setVoltage(-3)));
+      controller.b().onFalse(new InstantCommand(() -> wrist.stop()));
       
-      // controller.leftBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
-      // controller.leftBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      //intake
+      controller.leftBumper().onTrue(new InstantCommand(() -> collector.setVoltage(6)));
+      controller.leftBumper().onFalse(new InstantCommand(() -> collector.stop()));
 
-      // controller.rightBumper().onTrue(new InstantCommand(() -> wrist.setRollerVolts(6)));
-      // controller.rightBumper().onFalse(new InstantCommand(() -> wrist.stopPivot()));
+      // outtake
+      controller.rightBumper().onTrue(new InstantCommand(() -> collector.setVoltage(-6)));
+      controller.rightBumper().onFalse(new InstantCommand(() -> collector.stop()));
             
     }
 
